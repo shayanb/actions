@@ -29,13 +29,9 @@ def decode_and_convert_to_markdown(json_payload):
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        return None
+        return (f"An error occurred: {str(e)}")
 
-if __name__ == "__main__":
-    if len(sys.argv) > 2:
-        print("Usage: python decode_to_github_issues.py <JSON_PAYLOAD>")
-        print(sys.args)
-    else:
-        JSON_PAYLOAD = sys.argv[1]
-        markdown_content = decode_and_convert_to_markdown(JSON_PAYLOAD)
-        print(markdown_content)  # This could be logged, saved, or used to create a GitHub issue etc.
+
+JSON_PAYLOAD = sys.argv[1]
+markdown_content = decode_and_convert_to_markdown(JSON_PAYLOAD)
+print(markdown_content)  # This could be logged, saved, or used to create a GitHub issue etc.

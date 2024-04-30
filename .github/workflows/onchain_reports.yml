@@ -36,8 +36,8 @@ jobs:
         python ./scripts/decode_to_github_issues.py "${{ github.event.client_payload.body }}" > output.md
 
 
-    - name: Print the Markdown content
-      run: cat output.md
+    # - name: Print the Markdown content
+    #   run: cat output.md
 
     - name: Create GitHub Issue from Markdown File
       uses: peter-evans/create-issue-from-file@v5
