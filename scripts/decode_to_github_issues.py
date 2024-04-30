@@ -19,7 +19,7 @@ def decode_and_convert_to_markdown(json_payload):
         #     markdown_lines.append(f"- **Confirmations**: {tx['confirmations']}\n")
 
         # Append raw data as an appendix
-        markdown_lines.append("## Appendix: Raw Data\n")
+        markdown_lines.append("Appendix: Raw Data\n")
         markdown_lines.append("```json")
         markdown_lines.append(json.dumps(transactions_data, indent=4))
         markdown_lines.append("```")
@@ -38,5 +38,4 @@ if __name__ == "__main__":
     else:
         JSON_PAYLOAD = sys.argv[1]
         markdown_content = decode_and_convert_to_markdown(JSON_PAYLOAD)
-        if markdown_content:
-            print(markdown_content)  # This could be logged, saved, or used to create a GitHub issue etc.
+        print(markdown_content)  # This could be logged, saved, or used to create a GitHub issue etc.

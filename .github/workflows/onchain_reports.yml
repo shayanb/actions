@@ -35,8 +35,12 @@ jobs:
         PAYLOAD: ${{ github.event.body }}
       id: exec_script
       run: |
-        output=$(python ./scripts/decode_to_github_issues.py '${{ toJson(github.event.client_payload) }}')
-        echo "MARKDOWN=$output" >> $GITHUB_ENV
+        echo 'MARKDOWN<<EOF' >> $GITHUB_ENV
+        python ./scripts/decode_to_github_issues.py "${{ toJson(github.event.client_payload) }}" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+
+    - name: Print the Markdown content
+      run: echo "$MARKDOWN"
 
     - name: Create GitHub Issue from Markdown File
       uses: peter-evans/create-issue-from-file@v5
