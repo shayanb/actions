@@ -29,7 +29,7 @@ def decode_and_convert_to_markdown(json_payload):
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")
-        return (f"An error occurred: {str(e)}")
+        return None
 
 
 JSON_PAYLOAD = sys.argv[1]

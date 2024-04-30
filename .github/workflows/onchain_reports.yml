@@ -17,6 +17,12 @@ on:
 jobs:
   process_and_notify:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -35,9 +41,11 @@ jobs:
       run: |
         python ./scripts/decode_to_github_issues.py "${{ github.event.client_payload.body }}" > output.md
 
+    - name: Print the Markdown content
+      run: |
+        cat output.md
+        cat ${{ github.event.client_payload }}
 
-    # - name: Print the Markdown content
-    #   run: cat output.md
 
     - name: Create GitHub Issue from Markdown File
       uses: peter-evans/create-issue-from-file@v5
@@ -45,4 +53,5 @@ jobs:
         title: "Onchain Update on $(date +'%Y-%m-%d %H:%M:%S')"
         labels: onchain update, automated
         content-filepath: output.md
+        issue-number: 1 # TODO: remove this for production
 
