@@ -19,9 +19,13 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
+      # contents: write
+      # pull-requests: write
+      # issues: write
+      # repository-projects: write
+      # statuses: read
+      # actions: write
+      permissions: write-all
 
     steps:
     - name: Checkout code
@@ -39,12 +43,12 @@ jobs:
     - name: Fetch webhook data and process
       id: exec_script
       run: |
-        python ./scripts/decode_to_github_issues.py "${{ github.event.client_payload.body }}" > output.md
+        python ./scripts/decode_to_github_issues.py "${{ github.event.inputs }}" > output.md
 
     - name: Print the Markdown content
       run: |
         cat output.md
-        cat ${{ github.event.client_payload }}
+        echo ${{ github.event.inputs }}
 
 
     - name: Create GitHub Issue from Markdown File
