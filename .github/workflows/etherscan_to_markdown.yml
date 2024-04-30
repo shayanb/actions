@@ -30,20 +30,17 @@ jobs:
       run: |
         pip install requests
 
-    - name: Fetch data from API using webhook data
+    - name: Fetch webhook data and process
       env:
         PAYLOAD: ${{ github.event.body }}
-        # ETH_ADDRESS: ${{ github.event.client_payload.eth_address }}
+      id: exec_script
       run: |
-        python ./scripts/fetch_data.py $PAYLOAD transactions.json
-
-    - name: Convert data to Markdown
-      run: |
-        python ./scripts/convert_to_markdown.py transactions.json issue_content.md
+        output="$(python ./scripts/decode_to_github_issue.py $PAYLOAD)"
+        echo "::set-output name=markdown::$output"
 
     - name: Create GitHub Issue from Markdown File
       uses: peter-evans/create-issue-from-file@v3
       with:
         title: "Onchain Update on $(date +'%Y-%m-%d %H:%M:%S')"
-        content-filepath: ./issue_content.md
-        labels: onchain update
+        labels: onchain update, automated
+        body: ${{ steps.exec_script.outputs.markdown }}
