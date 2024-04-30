@@ -36,14 +36,13 @@ jobs:
       id: exec_script
       run: |
         echo "MARKDOWN<<EOF" >> $GITHUB_ENV
-        python ./scripts/decode_to_github_issues.py $PAYLOAD > $GITHUB_ENV
+        python ./scripts/decode_to_github_issues.py ${{ github.event.client_payload }} >> $GITHUB_ENV
         echo "EOF" >> $GITHUB_ENV
-
 
     - name: Create GitHub Issue from Markdown File
       uses: peter-evans/create-issue-from-file@v5
       with:
         title: "Onchain Update on $(date +'%Y-%m-%d %H:%M:%S')"
         labels: onchain update, automated
-        content: ${{ env.MARKDOWN }}
+        content-filepath: ${{ env.MARKDOWN }}
 
