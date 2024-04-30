@@ -18,14 +18,14 @@ jobs:
   process_and_notify:
     runs-on: ubuntu-latest
 
-    permissions:
+    # permissions:
       # contents: write
       # pull-requests: write
       # issues: write
       # repository-projects: write
       # statuses: read
       # actions: write
-      permissions: write-all
+    permissions: write-all
 
     steps:
     - name: Checkout code
