@@ -32,8 +32,9 @@ def decode_and_convert_to_markdown(json_payload):
         return None
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) > 2:
         print("Usage: python decode_to_github_issues.py <JSON_PAYLOAD>")
+        print(sys.args)
     else:
         JSON_PAYLOAD = sys.argv[1]
         markdown_content = decode_and_convert_to_markdown(JSON_PAYLOAD)
