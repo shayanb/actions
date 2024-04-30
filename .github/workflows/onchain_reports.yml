@@ -35,7 +35,7 @@ jobs:
         PAYLOAD: ${{ github.event.body }}
       id: exec_script
       run: |
-        output="$(python ./scripts/decode_to_github_issue.py $PAYLOAD)"
+        output="$(python ./scripts/decode_to_github_issues.py $PAYLOAD)"
         echo "::set-output name=markdown::$output"
 
     - name: Create GitHub Issue from Markdown File
