@@ -48,7 +48,7 @@ jobs:
     - name: Print the Markdown content
       run: |
         cat output.md
-        echo ${{ github.event.inputs }}
+        echo ${{ github.event.inputs.body }}
 
 
     - name: Create GitHub Issue from Markdown File
