@@ -45,7 +45,7 @@ jobs:
       uses: peter-evans/create-issue-from-file@v5
       env:
         MARKDOWN: ${{ env.MARKDOWN }}
-      inputs:
+      with:
         token: ${{ secrets.TOKEN }}
         title: "Onchain Update on $(date +'%Y-%m-%d %H:%M:%S')"
         labels: onchain update, automated
