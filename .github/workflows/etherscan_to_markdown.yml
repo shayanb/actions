@@ -4,6 +4,13 @@ on:
   repository_dispatch:
     types: [onchain-event]
 
+  workflow_dispatch:
+    inputs:
+      body:
+        description: 'body'
+        required: false
+        default: 'Body, expecting json'
+
 # https://api.github.com/repos/shayanb/actions/dispatches
 
 
@@ -25,7 +32,7 @@ jobs:
 
     - name: Fetch data from API using webhook data
       env:
-        PAYLOAD: ${{ github.event.payload }}
+        PAYLOAD: ${{ github.event.body }}
         # ETH_ADDRESS: ${{ github.event.client_payload.eth_address }}
       run: |
         python ./scripts/fetch_data.py $PAYLOAD transactions.json
